@@ -12,8 +12,8 @@ six_color = Color(0, 147, 61)
 text_color = Color(200, 200, 200)
 no_color = Color(0, 0, 0)
 half_seconds: int = 0
-six_up_times = TrainTimes("6", "632N")
-six_times = TrainTimes("6", "632S")
+six_up_times = TrainTimes("G", "G24S")
+six_times = TrainTimes("7", "721S")
 current_weather = Weather()
 
 tasks = {}
@@ -45,9 +45,9 @@ async def draw():
     six_up_y = 5
     # Draw 6 uptown
     matrix.drawFilledCircle(4, six_up_y + 2, 4, six_color)
-    matrix.drawText(3, six_up_y + 5, no_color, "6")
+    matrix.drawText(3, six_up_y + 5, no_color, "G")
     # Draw stop + up arrow
-    matrix.drawText(9, six_up_y + 5, six_color, "33")
+    matrix.drawText(9, six_up_y + 5, six_color, "21")
     matrix.drawLine(18, six_up_y, 18, six_up_y + 4, six_color)
     matrix.drawLine(17, six_up_y + 1, 19, six_up_y + 1, six_color)
     # Draw times
@@ -57,9 +57,9 @@ async def draw():
     six_y = 15
     # Draw 6 downtown
     matrix.drawFilledCircle(4, six_y + 2, 4, six_color)
-    matrix.drawText(3, six_y + 5, no_color, "6")
+    matrix.drawText(3, six_y + 5, no_color, "7")
     # Draw stop + down arrow
-    matrix.drawText(9, six_y + 5, six_color, "33")
+    matrix.drawText(9, six_y + 5, six_color, "VJ")
     matrix.drawLine(18, six_y, 18, six_y + 4, six_color)
     matrix.drawLine(17, six_y + 3, 19, six_y + 3, six_color)
     # Draw times

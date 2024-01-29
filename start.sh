@@ -1,1 +1,1 @@
-sudo ./display.py >> output 2>&1 &
+sudo /home/kasey/kyles-rgb-matrix/display.py >> output 2>&1 &
