@@ -10,6 +10,7 @@ import signal, sys
 matrix = Matrix()
 seven_train_color = Color(185, 51, 173)
 g_train_color = Color(110, 222, 93)
+recency_line_color = Color(41, 171, 9)
 text_color = Color(200, 200, 200)
 no_color = Color(0, 0, 0)
 half_seconds: int = 0
@@ -41,7 +42,7 @@ async def draw():
     half_seconds += 1
 
     # Draw recency line
-    matrix.drawLine(0, 0, half_seconds, 0, g_train_color)
+    matrix.drawLine(0, 0, half_seconds, 0, recency_line_color)
 
     six_up_y = 5
     # Draw G
