@@ -10,7 +10,6 @@ import signal, sys
 matrix = Matrix()
 seven_train_color = Color(185, 51, 173)
 g_train_color = Color(110, 222, 93)
-recency_line_color = Color(41, 171, 9)
 text_color = Color(200, 200, 200)
 no_color = Color(0, 0, 0)
 half_seconds: int = 0
@@ -41,35 +40,28 @@ async def draw():
     global half_seconds, scheduler, g_times, seven_times, current_weather
     half_seconds += 1
 
-    # Draw recency line
-    matrix.drawLine(0, 0, half_seconds, 0, recency_line_color)
-
-    six_up_y = 5
+    subway_time_1 = 5
     # Draw G
-    matrix.drawFilledCircle(4, six_up_y + 2, 4, g_train_color)
-    matrix.drawText(3, six_up_y + 5, no_color, "G")
-    # Draw stop + up arrow
-    matrix.drawText(9, six_up_y + 5, g_train_color, "21")
-    matrix.drawLine(18, six_up_y, 18, six_up_y + 4, g_train_color)
-    matrix.drawLine(17, six_up_y + 1, 19, six_up_y + 1, g_train_color)
+    matrix.drawFilledCircle(4, subway_time_1 + 2, 4, g_train_color)
+    matrix.drawText(3, subway_time_1 + 5, no_color, "G")
+    # Draw stop
+    matrix.drawText(9, subway_time_1 + 5, g_train_color, "21")
     # Draw times
-    matrix.drawText(21, six_up_y + 5, text_color, format_times(g_times))
+    matrix.drawText(21, subway_time_1 + 5, text_color, format_times(g_times))
 
     
-    six_y = 15
+    subway_time_2 = 15
     # Draw 7
-    matrix.drawFilledCircle(4, six_y + 2, 4, seven_train_color)
-    matrix.drawText(3, six_y + 5, no_color, "7")
-    # Draw stop + down arrow
-    matrix.drawText(9, six_y + 5, seven_train_color, "VJ")
-    matrix.drawLine(18, six_y, 18, six_y + 4, seven_train_color)
-    matrix.drawLine(17, six_y + 3, 19, six_y + 3, seven_train_color)
+    matrix.drawFilledCircle(4, subway_time_2 + 2, 4, seven_train_color)
+    matrix.drawText(3, subway_time_2 + 5, no_color, "7")
+    # Draw stop
+    matrix.drawText(9, subway_time_2 + 5, seven_train_color, "VJ")
     # Draw times
-    matrix.drawText(21, six_y + 5, text_color, format_times(seven_times))
+    matrix.drawText(21, subway_time_2 + 5, text_color, format_times(seven_times))
     
     weather_y = 25
     # Draw weather
-    matrix.drawText(9, weather_y + 5, text_color, f'{current_weather.current}°, {current_weather.low}°-{current_weather.high}°')
+    matrix.drawText(9, weather_y + 5, text_color, f'{current_weather.current}°,{current_weather.low}°-{current_weather.high}°')
 
     if current_weather.icon_paths:
         icon_path = current_weather.icon_paths[half_seconds % len(current_weather.icon_paths)]
@@ -81,7 +73,7 @@ async def run_draw_loop():
     global tasks
     while True:
         tasks['draw'] = asyncio.gather(
-                asyncio.sleep(.5),
+                asyncio.sleep(0.5),
                 draw()
         )
         await tasks['draw']
